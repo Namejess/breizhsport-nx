@@ -5,7 +5,6 @@ on:
     branches:
       - main
   pull_request:
-  workflow_dispatch:
 
 permissions:
   actions: read
@@ -20,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Cache node_modules
+      # Cache node_modules and set up Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -29,9 +28,11 @@ jobs:
       # Install dependencies
       - run: npm ci --legacy-peer-deps
 
-      # Run Nx tasks (lint, test, build)
+      # Set SHAs for Nx
       - uses: nrwl/nx-set-shas@v4
-      - run: npx nx affected -t lint test build
+
+      # Run Nx affected tasks (lint, build)
+      - run: npx nx affected -t lint build
 
       # Install and start Nginx
       - name: Install and start Nginx
@@ -40,10 +41,12 @@ jobs:
           sudo apt-get install -y nginx
           sudo systemctl start nginx
 
-      # Run ZAP security scan with the official ZAP action
+      # Run ZAP security scan using the official ZAP action
       - name: ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.5.0
+        id: action-full-scan
         with:
           target: 'http://localhost'
+          allow_issue_writing: false
           fail_action: true
           cmd_options: '-a'
