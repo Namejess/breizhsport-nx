@@ -1,28 +1,36 @@
-# This template uses Automatically Copying Traced Files feature
-# so you need to setup your Next Config file to use `output: 'standalone'`
-# Please read this for more information https://nextjs.org/docs/pages/api-reference/next-config-js/output
-
-# Production image, copy all the files and run next
+# Utilise une image Node.js Alpine LTS comme base
 FROM docker.io/node:lts-alpine AS runner
+
+# Installe dumb-init pour gérer les signaux et la gestion des PID
 RUN apk add --no-cache dumb-init
+
+# Définit les variables d’environnement
 ENV NODE_ENV=production
 ENV PORT=3000
+
+# Crée le répertoire de travail pour l'application
 WORKDIR /usr/src/app
-RUN chmod 777 node_modules
+
+# Copie uniquement les fichiers nécessaires à l'exécution en production
 COPY apps/breizhsport/next.config.js ./
 COPY apps/breizhsport/public ./public
 COPY apps/breizhsport/.next/standalone/apps/breizhsport ./
 COPY apps/breizhsport/.next/standalone/package.json ./
 COPY apps/breizhsport/.next/standalone/node_modules ./node_modules
 COPY apps/breizhsport/.next/static ./.next/static
-# RUN npm i sharp
-COPY --chown=node:node . .
+
+# Définit les permissions spécifiques pour le dossier d'application
+# et assure que l'utilisateur "node" possède les accès requis
+RUN chown -R node:node /usr/src/app
+
+# Exécute les processus en tant qu'utilisateur non privilégié "node"
 USER node
+
+# Expose le port de l'application
 EXPOSE 3000
-# COPY --chown=node:node ./tools/scripts/entrypoints/api.sh /usr/local/bin/docker-entrypoint.sh
-# ENTRYPOINT [ "docker-entrypoint.sh" ]
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry.
+
+# Désactive la télémétrie de Next.js (facultatif)
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Lancement de l'application avec dumb-init pour la gestion des PID
 CMD ["dumb-init", "node", "server.js"]
