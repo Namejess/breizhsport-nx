@@ -11,6 +11,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
+    "@nx-tools/nx-container": "^6.1.0",
+    "@nx-tools/nx-prisma": "^6.4.0",
     "@nx/cypress": "20.0.10",
     "@nx/esbuild": "20.0.10",
     "@nx/eslint": "20.0.10",
