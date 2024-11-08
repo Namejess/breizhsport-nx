@@ -34,6 +34,15 @@ jobs:
       # Run Nx affected tasks (lint, build)
       - run: npx nx affected -t lint build
 
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4
+        # Commonly enabled options, see https://github.com/actions/dependency-review-action#configuration-options for all available options.
+        with:
+          comment-summary-in-pr: always
+        #   fail-on-severity: moderate
+        #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
+        #   retry-on-snapshot-warnings: true
+
       - name: ZAP Scan
         uses: zaproxy/action-full-scan@v0.11.0
         with:
@@ -42,4 +51,4 @@ jobs:
           target: 'https://www.cesi.fr/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
-            
+          
