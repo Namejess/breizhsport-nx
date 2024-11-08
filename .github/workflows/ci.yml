@@ -34,19 +34,6 @@ jobs:
       # Run Nx affected tasks (lint, build)
       - run: npx nx affected -t lint build
 
-      # Install and start Nginx
-      - name: Install and start Nginx
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y nginx
-          sudo systemctl start nginx
-
-      # Run ZAP security scan using the official ZAP action
       - name: ZAP Full Scan
-        uses: zaproxy/action-full-scan@v0.5.0
-        id: action-full-scan
-        with:
-          target: 'http://localhost'
-          allow_issue_writing: false
-          fail_action: true
-          cmd_options: '-a'
+        uses: zaproxy/action-full-scan@v0.11.0
+            
