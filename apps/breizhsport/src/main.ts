@@ -1,14 +1,25 @@
-import express from 'express';
+import express, { Application } from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import productRoutes from './routes/productRoutes';
 
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+dotenv.config();
 
-const app = express();
+const app: Application = express();
+const PORT = process.env.PORT_API_BREIZHSPORT
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
+// Middleware pour analyser le JSON
+app.use(express.json());
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+// Connexion à MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connecté'))
+  .catch((error) => console.error('Erreur de connexion à MongoDB:', error));
+
+
+// Utilisation des routes
+app.use('/', productRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Serveur en écoute sur http://localhost:${PORT}`);
 });
