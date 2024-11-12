@@ -1,7 +1,7 @@
 {
-  "name": "breizhsport",
+  "name": "breizhsport-authentification",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/breizhsport/src",
+  "sourceRoot": "apps/breizhsport-authentification/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,12 +11,12 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/breizhsport",
+        "outputPath": "dist/apps/breizhsport-authentification",
         "format": ["cjs"],
         "bundle": false,
-        "main": "apps/breizhsport/src/main.ts",
-        "tsConfig": "apps/breizhsport/tsconfig.app.json",
-        "assets": ["apps/breizhsport/src/assets"],
+        "main": "apps/breizhsport-authentification/src/main.ts",
+        "tsConfig": "apps/breizhsport-authentification/tsconfig.app.json",
+        "assets": ["apps/breizhsport-authentification/src/assets"],
         "generatePackageJson": true,
         "esbuildOptions": {
           "sourcemap": true,
@@ -28,7 +28,6 @@
       "configurations": {
         "development": {},
         "production": {
-          "generateLockfile": true,
           "esbuildOptions": {
             "sourcemap": false,
             "outExtension": {
@@ -43,38 +42,23 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "breizhsport:build",
+        "buildTarget": "breizhsport-authentification:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "breizhsport:build:development"
+          "buildTarget": "breizhsport-authentification:build:development"
         },
         "production": {
-          "buildTarget": "breizhsport:build:production"
+          "buildTarget": "breizhsport-authentification:build:production"
         }
       }
     },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f apps/breizhsport/Dockerfile . -t breizhsport"
-    },
-    "container": {
-      "executor": "@nx-tools/nx-container:build",
-      "dependsOn": ["build"],
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "engine": "docker",
-        "metadata": {
-          "images": ["breizhsport"],
-          "load": true,
-          "tags": [
-            "type=schedule",
-            "type=ref,event=branch",
-            "type=ref,event=tag",
-            "type=ref,event=pr",
-            "type=sha,prefix=sha-"
-          ]
-        }
+        "jestConfig": "apps/breizhsport-authentification/jest.config.ts"
       }
     }
   }
