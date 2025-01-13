@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var mongoose_1 = require("mongoose");
-var dotenv_1 = require("dotenv");
-var productRoutes_1 = require("./routes/productRoutes");
+const express_1 = require("express");
+const mongoose_1 = require("mongoose");
+const dotenv_1 = require("dotenv");
+const productRoutes_1 = require("./routes/productRoutes");
 dotenv_1.default.config();
-var app = (0, express_1.default)();
-var PORT = process.env.PORT_API_BREIZHSPORT;
+const app = (0, express_1.default)();
+const PORT = process.env.PORT_API_BREIZHSPORT;
 // Middleware pour analyser le JSON
 app.use(express_1.default.json());
 // Connexion à MongoDB

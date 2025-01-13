@@ -1,15 +1,15 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+const __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        // function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+const __generator = (this && this.__generator) || function (thisArg, body) {
+    let _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
     return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
@@ -37,14 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteProduct = exports.updateProduct = exports.createProduct = exports.getProductById = exports.getProducts = void 0;
-var Products_1 = require("../models/Products");
+const Products_1 = require("../models/Products");
 // Récupérer tous les produits
-var getProducts = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var products, error_1;
+const getProducts = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    let products, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 2, 3]);
                 return [4 /*yield*/, Products_1.default.find()];
             case 1:
                 products = _a.sent();
@@ -60,12 +60,12 @@ var getProducts = function (req, res) { return __awaiter(void 0, void 0, void 0,
 }); };
 exports.getProducts = getProducts;
 // Récupérer un produit par ID
-var getProductById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var product, error_2;
+const getProductById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    let product, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 2, 3]);
                 return [4 /*yield*/, Products_1.default.findById(req.params.id)];
             case 1:
                 product = _a.sent();
@@ -83,13 +83,13 @@ var getProductById = function (req, res) { return __awaiter(void 0, void 0, void
 }); };
 exports.getProductById = getProductById;
 // Créer un nouveau produit
-var createProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, price, description, inStock, newProduct, savedProduct, error_3;
+const createProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    let _a, name_1, price, description, inStock, newProduct, savedProduct, error_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, name_1 = _a.name, price = _a.price, description = _a.description, inStock = _a.inStock;
+                _b.trys.push([0, 2, 3]);
+                // _a = req.body, name_1 = _a.name, price = _a.price, description = _a.description, inStock = _a.inStock;
                 newProduct = new Products_1.default({ name: name_1, price: price, description: description, inStock: inStock });
                 return [4 /*yield*/, newProduct.save()];
             case 1:
@@ -106,12 +106,12 @@ var createProduct = function (req, res) { return __awaiter(void 0, void 0, void 
 }); };
 exports.createProduct = createProduct;
 // Mettre à jour un produit
-var updateProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var updatedProduct, error_4;
+const updateProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    let updatedProduct, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 2, 3]);
                 return [4 /*yield*/, Products_1.default.findByIdAndUpdate(req.params.id, req.body, { new: true })];
             case 1:
                 updatedProduct = _a.sent();
@@ -129,12 +129,12 @@ var updateProduct = function (req, res) { return __awaiter(void 0, void 0, void 
 }); };
 exports.updateProduct = updateProduct;
 // Supprimer un produit
-var deleteProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deletedProduct, error_5;
+const deleteProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    let deletedProduct, error_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                _a.trys.push([0, 2, 3]);
                 return [4 /*yield*/, Products_1.default.findByIdAndDelete(req.params.id)];
             case 1:
                 deletedProduct = _a.sent();
