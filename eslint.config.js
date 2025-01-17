@@ -8,11 +8,11 @@ module.exports = [
     ignores: ['**/dist'],
   },
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.vue'],
     rules: {
       '@typescript-eslint/no-unused-expressions': 'off',
-      '@typescript-eslint/no-empty-function' : 'off',
-      '@typescript-eslint/no-empty-object-type' : 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
       '@nx/enforce-module-boundaries': [
         'error',
         {
