@@ -1,0 +1,16 @@
+{
+  "name": "breizhsport-frontend-medusa",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/breizhsport-frontend-medusa",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/breizhsport-frontend-medusa/jest.config.ts"
+      }
+    }
+  }
+}

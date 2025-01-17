@@ -44,3 +44,13 @@ Thumbs.db
 .env
 
 vite.config.*.timestamp*
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+
+# Next.js
+.next
+out
